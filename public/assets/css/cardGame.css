@@ -1,0 +1,31 @@
+body {
+    background: #345;
+}
+
+.card-title{ color :white;}
+
+.item-card {
+    margin: 20px 10px 20px 10px;
+    background: white;
+    box-shadow: var(--shadow);
+    border-radius: 10px;
+    height: 200px;
+    position: relative;
+}
+
+.item-card .span-left{
+    position:absolute;
+    top:3px;
+    left:3px;
+    font-weight: bold;
+}
+.item-card .span-center{
+    text-align: center;
+    margin-top: 50%;
+}
+.item-card .span-right{
+    position:absolute;
+    bottom:3px;
+    right:3px;
+    font-weight: bold;
+}

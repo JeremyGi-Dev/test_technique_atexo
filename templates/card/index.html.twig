@@ -3,15 +3,16 @@
 {% block title %}Jeu de carte{% endblock %}
 
 {% block body %}
-    <div class="row">
+    <div class="row maincontainer">
         <div class="col-md-10 offset-md-1">
-            <h2 class="text-center">&hearts;&spades; Card Game  &diams;&clubs;</h2>
+            <h2 class="text-center card-title">&hearts;&spades; Card Game  &diams;&clubs;</h2>
             <div class="row">
                 {% set hands = app.session.get('PlayerHand') %}
                 {% for hand in hands %}
-                    <div class="col-md-1 item-card">
-                        {{hand[0]}}
-                        {{hand[1]}}
+                    <div class="col-md-2 item-card">
+                        <div class="span-left">{{hand[0]}}</div>
+                        <div class="span-center">{{hand[1]}}</div>
+                        <div class="span-right">{{hand[0]}}</div>
                     </div>
                 {% endfor %}
             </div>
