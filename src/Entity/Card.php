@@ -2,12 +2,6 @@
 
 namespace App\Entity;
 
-use App\Repository\CardRepository;
-use Doctrine\ORM\Mapping as ORM;
-
-/**
- * @ORM\Entity(repositoryClass=CardRepository::class)
- */
 class Card
 {
     /**
@@ -15,44 +9,37 @@ class Card
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    public $id;
 
     /**
      * @ORM\Column(type="array")
      */
-    private $colors = ["Carreaux", "Coeur", "Pique", "Trèfle"];
+    public $colors = ["Carreaux", "Coeur", "Pique", "Trèfle"];
 
     /**
      * @ORM\Column(type="array")
      */
-    private $CardValues = ["AS", "5", "10", "8", "6", "5", "7", "4", "2", "3", "9", "Dame", "Roi", "Valet"];
+    public $CardValues = ["AS", "5", "10", "8", "6", "5", "7", "4", "2", "3", "9", "Dame", "Roi", "Valet"];
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    /**
+     * Fonction retournant une main contenant 10 carte aléatoire créé dans un deck de 52 cartes
+     * @return Array
+     */
+    public function createHand(){
+        $colors = ["Carreaux", "Coeur", "Pique", "Trèfle"];
+        $CardValues = ["AS", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Valet", "Dame", "Roi"];
+        $CardGame =  [];
 
-    public function getColors(): ?array
-    {
-        return $this->colors;
-    }
+        foreach($colors as $color){
+            foreach($CardValues as $values){
+                $CardGame[] = [$values,$color];
+            }
+        }
+        // mélange l'array pour le côté random
+        shuffle($CardGame);
 
-    public function setColors(array $colors): self
-    {
-        $this->colors = $colors;
+        $hand = array_slice($CardGame, 0, 10);
 
-        return $this;
-    }
-
-    public function getCardValues(): ?array
-    {
-        return $this->CardValues;
-    }
-
-    public function setCardValues(array $CardValues): self
-    {
-        $this->CardValues = $CardValues;
-
-        return $this;
+        return $hand;
     }
 }
