@@ -14,12 +14,12 @@ class Card
     /**
      * @ORM\Column(type="array")
      */
-    public $colors = ["Carreaux", "Coeur", "Pique", "Trèfle"];
+    public $colors = [];
 
     /**
      * @ORM\Column(type="array")
      */
-    public $CardValues = ["AS", "5", "10", "8", "6", "5", "7", "4", "2", "3", "9", "Dame", "Roi", "Valet"];
+    public $cardValues = [];
 
     /**
      * Fonction retournant une main contenant 10 carte aléatoire créé dans un deck de 52 cartes
@@ -27,18 +27,21 @@ class Card
      */
     public function createHand(){
         $colors = ["Carreaux", "Coeur", "Pique", "Trèfle"];
-        $CardValues = ["AS", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Valet", "Dame", "Roi"];
-        $CardGame =  [];
+        $cardValues = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"];
+        $cardGame =  [];
 
         foreach($colors as $color){
-            foreach($CardValues as $values){
-                $CardGame[] = [$values,$color];
+            foreach($cardValues as $values){
+                $cardGame[] = [
+                    "valeur" => $values, 
+                    "couleur" => $color
+                ];
             }
         }
         // mélange l'array pour le côté random
-        shuffle($CardGame);
+        shuffle($cardGame);
 
-        $hand = array_slice($CardGame, 0, 10);
+        $hand = array_slice($cardGame, 0, 10);
 
         return $hand;
     }

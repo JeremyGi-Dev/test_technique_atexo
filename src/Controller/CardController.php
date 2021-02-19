@@ -32,4 +32,37 @@ class CardController extends AbstractController
 
         return $this->render('card/index.html.twig');
     }
+
+    /**
+     * @Route("/filter", name="filter_home")
+     */
+    public function filter(): Response
+    {
+        $hands = $this->session->get('PlayerHand');
+
+        usort($hands, function($a, $b) {
+            // on tri d'abord par couleur
+            $arraySorted = $a['couleur'] <=> $b['couleur'];
+        
+            // on tri par valeur ensuite
+            if($arraySorted == 0)
+                $arraySorted = $a['valeur'] <=> $b['valeur'];
+        
+            return $arraySorted;
+        });
+
+        $this->session->set('PlayerHand', $hands);
+
+        return $this->render('card/index.html.twig');
+    }
+
+    /**
+     * @Route("/reset", name="reset_home")
+     */
+    public function reset(): Response
+    {
+        $this->session->clear();
+
+        return $this->index();
+    }
 }
