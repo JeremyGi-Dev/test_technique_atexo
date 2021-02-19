@@ -6,6 +6,12 @@
     <div class="row maincontainer">
         <div class="col-md-10 offset-md-1">
             <h2 class="text-center card-title">&hearts;&spades; Card Game  &diams;&clubs;</h2>
+            <div class="form-group">
+                <div class="col-md-6 offset-md-3">
+                    <a href="{#{{path('')}}#}" class="btn btn-primary">Filtrer par Couleurs</a>
+                    <a href="{#{{path('')}}#}" class="btn btn-danger">Tirer un nouveau jeu de cartes</a>
+                </div>
+            </div>
             <div class="row">
                 {% set hands = app.session.get('PlayerHand') %}
                 {% for hand in hands %}
