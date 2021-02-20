@@ -20,12 +20,33 @@ body {
     font-weight: bold;
 }
 .item-card .span-center{
-    text-align: center;
-    margin-top: 50%;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 .item-card .span-right{
     position:absolute;
     bottom:3px;
     right:3px;
     font-weight: bold;
+}
+
+.red{
+    color: red;
+}
+.rose{
+    color: red;
+}
+.gray{
+    color : black;
+}
+.black{
+    color : black;
+}
+
+div .span-center.Carreaux, div .span-center.Coeur, div .span-center.Pique, div .span-center.Trèfle{
+    font-size: 70px;
 }

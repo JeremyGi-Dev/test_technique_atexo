@@ -10,5 +10,26 @@
     </head>
     <body>
         {% block body %}{% endblock %}
+        {% block javascripts %}
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script type="text/javascript">
+                if($('div').hasClass('Carreaux')){
+                    $('div .Carreaux').addClass('red');
+                    $('div .span-center.Carreaux').html("&diams;");
+                }
+                if($('div').hasClass('Coeur')){
+                    $('div .Coeur').addClass('rose');
+                    $('div .span-center.Coeur').html("&hearts;");
+                }
+                if($('div').hasClass('Pique')){
+                    $('div .Pique').addClass('gray');
+                    $('div .span-center.Pique').html("&spades;");
+                }
+                if($('div').hasClass('Trèfle')){
+                    $('div .Trèfle').addClass('black');
+                    $('div .span-center.Trèfle').html("&clubs;");
+                }
+            </script>
+        {% endblock %}
     </body>
 </html>
