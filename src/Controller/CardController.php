@@ -24,7 +24,7 @@ class CardController extends AbstractController
     {
         if(empty($this->session->get('PlayerHand'))){
             $card = new Card();
-            $hands = $card->createHand();
+            $hands = $card->createHand($card->colors, $card->cardValues, $card->cardNames);
 
             // on le met en session pour le travailler plus tard
             $this->session->set('PlayerHand', $hands);
@@ -34,23 +34,35 @@ class CardController extends AbstractController
     }
 
     /**
-     * @Route("/filter", name="filter_home")
+     * @Route("/filter/{name}", name="filter")
      */
-    public function filter(): Response
+    public function filter(string $name): Response
     {
         $hands = $this->session->get('PlayerHand');
 
-        usort($hands, function($a, $b) {
-            // on tri d'abord par couleur
-            $arraySorted = $a['couleur'] <=> $b['couleur'];
-        
-            // on tri par valeur ensuite
-            if($arraySorted == 0)
+        if($name == 'couleur'){
+            usort($hands, function($a, $b) {
+                // on tri d'abord par couleur
+                $arraySorted = $a['couleur'] <=> $b['couleur'];
+            
+                // on tri par valeur ensuite
+                if($arraySorted == 0)
+                    $arraySorted = $a['valeur'] <=> $b['valeur'];
+            
+                return $arraySorted;
+            });
+        }
+        else if($name == 'valeur'){
+            usort($hands, function($a, $b) {
+                // on tri d'abord par couleur
                 $arraySorted = $a['valeur'] <=> $b['valeur'];
+                return $arraySorted;
+            });
+        }
+        else{
+            // si pas de parametre, on ne fait rien
+        }
         
-            return $arraySorted;
-        });
-
         $this->session->set('PlayerHand', $hands);
 
         return $this->render('card/index.html.twig');

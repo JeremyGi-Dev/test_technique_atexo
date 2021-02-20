@@ -7,28 +7,31 @@
         <div class="col-md-10 offset-md-1">
             <h2 class="text-center card-title">&hearts;&spades; Card Game  &diams;&clubs;</h2>
             <div class="form-group">
-                <div class="col-md-6 offset-md-3">
-                    <a href="{{path('filter_home')}}" class="btn btn-primary">Filtrer par Couleurs</a>
+                <div class="col-md-9 offset-md-3">
+                    <a href="{{ path('filter', {name: 'couleur'}) }}" class="btn btn-primary">Filtrer par Couleurs</a>
+                    <a href="{{ path('filter', {name: 'valeur'}) }}" class="btn btn-info">Filtrer par Valeurs</a>
                     <a href="{{path('reset_home')}}" class="btn btn-danger">Tirer un nouveau jeu de cartes</a>
                 </div>
             </div>
             <div class="row">
                 {% set hands = app.session.get('PlayerHand') %}
-                    {#{% switch hand %}
-                        {% case 11 %} 
-                            {{ "%hand["valeur"]%" | replace({'%hand["valeur"]%': "Valet"}) }}
-                        {% case 12 %}
-                        {% case 13 %}
-                        {% case 14 %}
-                    {% endswitch %}#}
                 {% for hand in hands %}
                     <div class="col-md-2 item-card">
-                        <div class="span-left">{{hand["valeur"]}}</div>
-                        <div class="span-center">{{hand["couleur"]}}</div>
-                        <div class="span-right">{{hand["valeur"]}}</div>
+                        <div class="span-left">{{hand["nom"]}}</div>
+                        <div class="span-center {{hand["couleur"]}}">{{hand["couleur"]}}</div>
+                        <div class="span-right">{{hand["nom"]}}</div>
                     </div>
                 {% endfor %}
             </div>
         </div>
     </div>
+
+    {% block javascripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            if($('div').hasClass('Carreaux'))
+                $('div .Carreaux').addClass('red');
+        </script>
+    {% endblock %}
+
 {% endblock %}
